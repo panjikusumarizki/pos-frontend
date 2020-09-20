@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'airbnb';
+    src: url('../font/AirbnbCereal-Medium.ttf');
+}
+
+#app {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'airbnb';
+}
