@@ -20,9 +20,12 @@
           />
         </div>
 
-        <router-link to="/login">
-          <a href="#" class="login-page">Login</a>
-        </router-link>
+        <div id="login-group">
+          <h6>Already have an account?</h6>
+          <router-link to="/login">
+            <a href="#" class="login-page">Login</a>
+          </router-link>
+        </div>
 
         <button type="submit" class="register-btn">Register</button>
       </form>
@@ -31,6 +34,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data () {
     return {
@@ -39,9 +44,25 @@ export default {
         password: ''
       }
     }
+  },
+  methods: {
+    ...mapActions({
+      actionRegister: 'auth/register'
+    }),
+    onRegister () {
+      this.actionRegister(this.form).then((response) => {
+        alert(response)
+        if (response !== 'Email is exist') {
+          window.location = '/login'
+        }
+      }).catch((err) => {
+        alert(err)
+      })
+    }
   }
 }
 </script>
+
 <style scoped>
 #wrapper {
   min-height: 100vh;
@@ -91,12 +112,20 @@ h1 {
   color: #2ec1ac;
 }
 
+#login-group {
+  display: flex;
+  justify-content: center;
+}
+
+#login-group h6 {
+  padding-right: 5px;
+  color: #555;
+}
+
 .login-page {
   display: block;
   color: #777;
-  text-align: center;
   text-transform: capitalize;
-  margin: 30px 0;
   font-size: 14px;
 }
 

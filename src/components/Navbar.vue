@@ -10,9 +10,9 @@
                     <h4>Food Items</h4>
                 </div>
 
-                <div id="search-group">
-                    <div id="search" @click="setDisplay()">
-                        <img src="../assets/img/search.png">
+                <div id="logout">
+                    <div id="logout-btn" @click="logout()">
+                        <img src="../assets/img/logout.png">
                     </div>
                 </div>
 
@@ -32,7 +32,24 @@
     </div>
 </template>
 
-<style>
+<script>
+import { mapActions } from 'vuex'
+
+export default {
+  methods: {
+    ...mapActions({
+      onLogout: 'auth/logout'
+    }),
+    logout () {
+      this.onLogout().then((response) => {
+        alert(response)
+        window.location = '/login'
+      })
+    }
+  }
+}
+</script>
+<style scoped>
 #navbar {
     background-color: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
@@ -52,9 +69,13 @@
     margin-bottom: 0;
 }
 
-#search {
+#logout {
     padding-right: 20px;
     border-right: 1px solid rgba(73, 73, 73, 0.2);
+    cursor: pointer;
+}
+
+#logout-btn {
     cursor: pointer;
 }
 
@@ -86,5 +107,32 @@
 
 #ic-cart {
     display: none;
+}
+
+@media only screen and (max-width: 576px) {
+    #logout {
+        padding-right: 10px;
+        border-right: 1px solid rgba(73, 73, 73, 0.2);
+        cursor: pointer;
+    }
+
+    #cart {
+        display: none;
+    }
+
+    #ic-cart {
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+    }
+
+    #cart-span p {
+        width: 20px;
+        height: 20px;
+        background-color: #57cad5;
+        border-radius: 100vh;
+        text-align: center;
+        color: #fff;
+    }
 }
 </style>

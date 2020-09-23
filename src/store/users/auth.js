@@ -1,4 +1,5 @@
 import axios from 'axios'
+const { url } = require('../../helpers/env')
 
 const state = () => {
   return {
@@ -19,13 +20,29 @@ const getters = {
 const actions = {
   login (context, payload) {
     return new Promise((resolve, reject) => {
-      axios.post('http://localhost:3001/users/login', payload).then((response) => {
+      axios.post(`${url}/users/login`, payload).then((response) => {
         localStorage.setItem('token', response.data.data.token)
         localStorage.setItem('refreshToken', response.data.data.refreshToken)
         resolve(response.data.message)
       }).catch((err) => {
-        console.log(err)
+        reject(err.message)
       })
+    })
+  },
+  register (context, payload) {
+    return new Promise((resolve, reject) => {
+      axios.post(`${url}/users/register`, payload).then((response) => {
+        resolve(response.data.message)
+      }).catch((err) => {
+        reject(err.message)
+      })
+    })
+  },
+  logout (context) {
+    return new Promise((resolve) => {
+      localStorage.removeItem('token')
+      localStorage.removeItem('refreshToken')
+      resolve('Logout success')
     })
   }
 }

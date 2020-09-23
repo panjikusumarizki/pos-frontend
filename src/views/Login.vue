@@ -14,7 +14,10 @@
                 <input type="password" v-model="form.password" id="password-input" autocomplete="off" required lang="en">
             </div>
 
-            <router-link to="/register"><a href="#" class="register-page">Register</a></router-link>
+            <div id="register-group">
+              <h6>Don't have an account?</h6>
+              <router-link to="/register"><a href="#" class="register-page"> Register</a></router-link>
+            </div>
 
             <button type="submit" class="login-btn">Login</button>
         </form>
@@ -38,7 +41,12 @@ export default {
     onLogin () {
       this.actionLogin(this.form).then((response) => {
         alert(response)
-        window.location = '/'
+        if (response !== 'Email is wrong' && response !== 'Password is wrong') {
+          window.location = '/'
+        } else {
+          localStorage.removeItem('token')
+          localStorage.removeItem('refreshToken')
+        }
       }).catch((err) => {
         alert(err)
       })
@@ -99,12 +107,20 @@ h1 {
     color: #2ec1ac;
 }
 
+#register-group {
+  display: flex;
+  justify-content: center;
+}
+
+#register-group h6 {
+  padding-right: 5px;
+  color: #555;
+}
+
 .register-page {
     display: block;
     color: #777;
-    text-align: center;
     text-transform: capitalize;
-    margin: 30px 0;
     font-size: 14px;
 }
 
