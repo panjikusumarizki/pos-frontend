@@ -11,9 +11,14 @@ import './assets/css/main.css'
 
 import axios from 'axios'
 
+axios.defaults.headers = {
+  token: localStorage.getItem('token')
+}
+
 axios.interceptors.response.use((response) => {
   return response
 }, (err) => {
+  console.log(err.response.data.message)
   if (err.response.data.message === 'Authentication failed, Token was expired') {
     return new Promise((resolve, reject) => {
       const refresh = localStorage.getItem('refreshToken')
@@ -28,10 +33,6 @@ axios.interceptors.response.use((response) => {
     })
   }
 })
-
-axios.defaults.headers = {
-  token: localStorage.getItem('token')
-}
 
 Vue.config.productionTip = false
 

@@ -7,7 +7,7 @@
                 </div>
 
                 <div class="mx-auto" id="title">
-                    <h4>Food Items</h4>
+                    <h4>{{title}}</h4>
                 </div>
 
                 <div id="logout">
@@ -34,8 +34,10 @@
 
 <script>
 import { mapActions } from 'vuex'
+import mixNav from '../mixins/nav'
 
 export default {
+  mixins: [mixNav],
   methods: {
     ...mapActions({
       onLogout: 'auth/logout'

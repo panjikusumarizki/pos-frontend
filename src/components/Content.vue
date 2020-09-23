@@ -18,22 +18,6 @@
           </div>
         </div>
 
-        <div id="bottom-menu">
-            <div id="bottom-menu-content">
-              <div id="fork-bottom">
-                <img src="../assets/img/fork.png" />
-              </div>
-              <router-link to="/history">
-                <div id="clipboard">
-                  <img src="../assets/img/clipboard.png" />
-                </div>
-              </router-link>
-              <div id="add" v-b-modal.my-modal>
-                <img src="../assets/img/add.png" />
-              </div>
-            </div>
-          </div>
-
         <div class="col-md-7 center-content">
           <div class="row" id="sorting">
             <input type="text" class="mb-4 search-bar" placeholder="Product name..." v-model="names" @keyup="search"/>
@@ -178,6 +162,22 @@
             </div>
           </div>
         </div>
+
+        <div id="bottom-menu">
+            <div id="bottom-menu-content">
+              <div id="fork-bottom">
+                <img src="../assets/img/fork.png" />
+              </div>
+              <router-link to="/history">
+                <div id="clipboard">
+                  <img src="../assets/img/clipboard.png" />
+                </div>
+              </router-link>
+              <div id="add" v-b-modal.my-modal>
+                <img src="../assets/img/add.png" />
+              </div>
+            </div>
+          </div>
       </div>
       <Modaladd/>
       <!-- <Modaledit/> -->
@@ -188,7 +188,6 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Modaladd from '../components/ModalAdd'
-// import Modaledit from '../components/ModalEdit'
 
 export default {
   components: {
@@ -497,6 +496,8 @@ export default {
     #bottom-menu {
         display: block;
         position: fixed;
+        align-items: center;
+        justify-content: center;
         bottom: 0;
         padding-top: 10px;
         padding-bottom: 15px;
